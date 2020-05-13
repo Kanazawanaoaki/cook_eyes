@@ -1,2 +1,2 @@
-# cook_eye
+# cook_eyes
 Implement the eyes of the cook
