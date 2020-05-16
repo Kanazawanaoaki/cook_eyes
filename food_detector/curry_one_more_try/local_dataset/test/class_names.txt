@@ -1,0 +1,9 @@
+_background_
+potato
+carrot
+onion
+pork
+curry_roux
+cutting_board
+knife
+peeler
