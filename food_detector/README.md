@@ -37,3 +37,9 @@ voc_datasets
 wget https://gist.githubusercontent.com/k-okada/bb65691bd58a6175b8f5f1c2a3c4caed/raw/0febe43740776051c2d4df6a11feaade9288320c/train_edgetpu_detection.sh
 bash ./train_edgetpu_detection.sh ./PATH_TO_VOC_DATASETS
 ```
+
+## dataset check
+https://gist.github.com/Kanazawanaoaki/fd3a876a152e9554e2432d1abe45dab9
+```
+python3 create_tf_record.py --data_dir=/PATH_TO_VOC_DATASETS --output_dir=/
+```
