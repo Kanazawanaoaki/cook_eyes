@@ -1,0 +1,3 @@
+0 potate
+1 onion
+2 carrot
