@@ -1,0 +1,24 @@
+<launch>
+  <arg name="gui" default="true"/>
+
+  <!-- play rosbag -->
+  <arg name="filename" default="$(find kitchen_recognition)/rosbag/tomato-and-onion-2020-05-20-16-19-40.bag" />
+  <node name="rosbag_play"
+        pkg="rosbag" type="play"
+        args="$(arg filename) --clock --loop"/>
+
+  
+  <node name="referene_tf_publisher"
+        pkg="tf" type="static_transform_publisher"
+        args="0 0 0 0 0 0 map camera_link 10" />
+  <node name="referene_tf_publisher2"
+        pkg="tf" type="static_transform_publisher"
+        args="0 0 0 -1.57 0 0 camera_link camera_rgb_optical_frame 10" />
+  
+  <group if="$(arg gui)">
+    <node name="rviz"
+          pkg="rviz" type="rviz"
+          args="-d $(find kitchen_recognition)/config/rosbag_test.rviz"/>
+  </group>
+
+</launch>
