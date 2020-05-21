@@ -1,11 +1,12 @@
 <launch>
-  <arg name="INPUT" default="/camera/depth/points" />
+  <!-- <arg name="INPUT" default="/kinect_head/depth_registered/throttled/points" /> -->
+  <arg name="INPUT" default="/camera/depth_registered/points" />
 
   <node name="pointcloud_to_pcd" type="nodelet" pkg="nodelet"
         args="standalone jsk_pcl_utils/PointCloudToPCD" output="screen" >
     <remap from="~input" to="$(arg INPUT)" />
     <rosparam subst_value="true">
-      prefix: $(find kitchen_recognition)/pcd/xtion_test/xtion_pcd_
+      prefix: $(find kitchen_recognition)/pcd/sample_pcd_
       duration: 0.5
       binary: false
       compressed: false

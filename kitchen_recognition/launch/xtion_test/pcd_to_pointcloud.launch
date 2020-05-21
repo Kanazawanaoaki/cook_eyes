@@ -1,0 +1,19 @@
+<launch>
+  <arg name="gui" default="true"/>
+
+  <node name="pcd_to_pointcloud"
+        pkg="pcl_ros" type="pcd_to_pointcloud"
+        args="$(find kitchen_recognition)/pcd/tomato_table.pcd 0.1">
+    <remap from="cloud_pcd" to="~output"/>
+    <rosparam>
+      frame_id: map
+    </rosparam>
+  </node>
+
+  <group if="$(arg gui)">
+    <node name="rviz"
+          pkg="rviz" type="rviz"
+          args="-d $(find kitchen_recognition)/config/pcd_test.rviz"/>
+  </group>
+
+</launch>

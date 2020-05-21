@@ -1,5 +1,6 @@
 <launch>
 
+  <arg name="INPUT" default="/camera/depth_registered/points" />
   <arg name="run_rviz" default="true" />
   <arg name="publish_objects_tf" default="true" />
   <arg name="launch_tracking" default="false" />
@@ -8,7 +9,7 @@
   <arg name="load_machine" default="true" />
   
   <include file="$(find jsk_pcl_ros)/sample/tabletop_object_detector.launch">
-    <arg name="input" value="/camera/depth_registered/points" />
+    <arg name="input" value="$(arg INPUT)" />
     <arg name="sensor_frame" value="/camera_rgb_optical_frame" />
     <arg name="manager" value="$(arg manager)" />
     <arg name="machine" value="$(arg machine)" />
@@ -20,7 +21,7 @@
 
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
-        args="-d $(find pr2eus_tutorials)/config/pr2_tabletop.rviz" />
+        args="-d $(find kitchen_recognition)/config/tabletop_test.rviz" />
   
 </launch>
  
