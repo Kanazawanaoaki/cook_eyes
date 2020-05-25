@@ -1,0 +1,12 @@
+__ignore__
+_background_
+potate
+onion
+carrot
+tomato
+octopus_wiener
+broccoli
+flower_carrot
+rolled_egg
+fried_chicken
+lunch_box
