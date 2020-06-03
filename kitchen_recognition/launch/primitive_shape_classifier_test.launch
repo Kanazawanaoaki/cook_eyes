@@ -97,6 +97,17 @@
     <remap from="~input/polygons" to="/multi_plane_estimate/output_polygon" />
   </node>
 
+  <node pkg="jsk_rviz_plugins"
+        type="classification_result_visualizer.py"
+        name="classification_result_visualizer">
+    <remap from="~input/classes" to="primitive_shape_classifier/output" />
+    <remap from="~input/boxes" to="segmentation_decomposer/boxes" />
+    <rosparam>
+      text_offset_z: -0.3
+      text_size: 0.05
+    </rosparam>
+  </node>
+
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
         args="-d $(find kitchen_recognition)/config/primitive_test.rviz" />

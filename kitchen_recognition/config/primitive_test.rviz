@@ -106,8 +106,8 @@ Visualization Manager:
       alpha: 0.800000011920929
       color: 25; 255; 0
       coloring: Auto
-      line width: 0.004999999888241291
-      only edge: false
+      line width: 0.00800000037997961
+      only edge: true
       show coords: true
     - Alpha: 1
       Class: jsk_rviz_plugin/PolygonArray
@@ -122,34 +122,14 @@ Visualization Manager:
       normal length: 0.10000000149011612
       only border: true
       show normal: true
-    - Class: rviz/InteractiveMarkers
-      Enable Transparency: true
+    - Class: rviz/MarkerArray
       Enabled: true
-      Name: TabletopObjectsInteractiveMarkers
-      Show Axes: false
-      Show Descriptions: true
-      Show Visual Aids: false
-      Update Topic: /bounding_box_interactive_marker/update
+      Marker Topic: /classification_result_visualizer/output
+      Name: MarkerArray
+      Namespaces:
+        primitive_shape_classifier: true
+      Queue Size: 100
       Value: true
-    - Align Bottom: false
-      Background Alpha: 0.800000011920929
-      Background Color: 0; 0; 0
-      Class: jsk_rviz_plugin/OverlayText
-      Enabled: true
-      Foreground Alpha: 0.800000011920929
-      Foreground Color: 25; 255; 240
-      Name: Grasp Status
-      Overtake Color Properties: false
-      Overtake Position Properties: false
-      Topic: /tabletop_object_grasp_status
-      Value: true
-      font: DejaVu Sans Mono
-      height: 128
-      left: 0
-      line width: 2
-      text size: 12
-      top: 0
-      width: 128
   Enabled: true
   Global Options:
     Background Color: 0; 0; 0
