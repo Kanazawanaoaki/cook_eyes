@@ -3,6 +3,9 @@
   <arg name="manager" default="primitive_shape_classifier_nodelet_manager" />
   <arg name="vital_rate" default="0.1" />
   <arg name="sensor_frame_id" default="/camera_rgb_optical_frame" />
+  <arg name="run_rviz" default="true" />
+
+  <arg name="machine" default="localhost" />
 
   <node name="$(arg manager)"
         pkg="nodelet" type="nodelet" args="manager" output="screen" />
@@ -92,5 +95,9 @@
       </rosparam>
     </node>
   </group>
+
+  <node if="$(arg run_rviz)"
+        pkg="rviz" name="pr2_rviz" type="rviz"
+        args="-d $(find kitchen_recognition)/config/primitive_test.rviz" />
 
 </launch>
