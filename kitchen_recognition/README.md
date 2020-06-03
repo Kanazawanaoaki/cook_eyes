@@ -14,5 +14,6 @@ cd ~/Desktop/codes/in_jsk/my_dataset/rosbag/record-test/
 rosbag play tomato-and-onion-2020-05-20-16-19-40.bag -l
 ```
 ```
+source ~/ros/jsk_demo_ws/devel/setup.bash
 roslaunch kitchen_recognition tabletop_test.launch
 ```
