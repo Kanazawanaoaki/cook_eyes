@@ -1,0 +1,53 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="image_input" default="/camera/rgb/image_rect_color" />
+  <arg name="cam_info" default="/camera/rgb/camera_info" />
+  <!-- <arg name="file" default="$(find kitchen_recognition)/data/template/light_switch.jpg" /> -->
+  <arg name="file" default="$(find kitchen_recognition)/data/template/test2.png" />
+  
+  <node name="imagesift" pkg="imagesift" type="imagesift" output="screen" >
+    <remap from="image" to="$(arg image_input)" />
+    <remap from="camera_info" to="$(arg cam_info)" />
+    <remap from="Feature0D" to="~output/Feature0d"/>
+    <remap from="ImageFeature0D" to="~output/ImageFeature0D"/>
+  </node>
+
+  <node name="image_publisher_reference"
+        pkg="jsk_perception" type="image_publisher.py">
+    <rosparam subst_value="true">
+      file_name: $(arg file)
+      publish_info: false
+      rate: 30
+    </rosparam>
+  </node>
+
+  <node name="point_pose_extractor"
+        pkg="jsk_perception" type="point_pose_extractor">
+    <remap from="ImageFeature0D" to="imagesift/output/ImageFeature0D"/>
+    <rosparam subst_value="true">
+      template_filename: $(arg file)
+      child_frame_id: matching
+      object_width: 0.07
+      object_height: 0.12
+      reprojection_threshold: 6.0
+      distanceratio_threshold: 0.8
+      error_threshold: 1000.0
+      viewer_window: false
+      window_name: light_switch
+    </rosparam>
+  </node>
+
+  <node name="dummy_obj_detector_subscriber"
+        pkg="kitchen_recognition"
+        type="dummy_obj_detector_subscriber.py">
+    <remap from="~input/dummy" to="/ObjectDetection"/>
+  </node>
+
+
+  <group if="$(arg gui)">
+    <node name="image_view_debug_image"
+          pkg="image_view" type="image_view">
+      <remap from="image" to="point_pose_extractor/debug_image"/>
+    </node>
+  </group>
+</launch>
