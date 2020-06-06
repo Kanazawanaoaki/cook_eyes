@@ -1,6 +1,7 @@
 <launch>
   <arg name="gui" default="true"/>
-  <arg name="image_input" default="/videofile/image_raw" />
+  <arg name="image_input" default="/camera/rgb/image_rect_color" />
+  <!-- <arg name="image_input" default="/videofile/image_raw" /> -->
   <arg name="cam_info" default="/camera/rgb/camera_info" />
   <!-- <arg name="file" default="$(find kitchen_recognition)/data/template/light_switch.jpg" /> -->
   <arg name="file" default="$(find kitchen_recognition)/data/template/roux.jpg" />
