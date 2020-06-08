@@ -18,6 +18,33 @@ source ~/ros/jsk_demo_ws/devel/setup.bash
 roslaunch kitchen_recognition tabletop_test.launch
 ```
 
+### how to run vegs sample with coral
+before run set Coral TPU to USB port!  
+launch tabletop recognition for vegs
+```
+source ~/ros/jsk_demo_ws/devel/setup.bash
+roslaunch kitchen_recognition tabletop_test_vegs_bags.launch
+```
+launch for reconstruct point cloud
+```
+source ~/ros/jsk_demo_ws/devel/setup.bash
+roslaunch kitchen_recognition depth2ptcloud.launch gui:=false
+```
+launch of object detection of Coral
+```
+source ~/coral_ws/devel/setup.bash
+roslaunch curry_detector_ros edgetpu_vegs_detector.launch INPUT_IMAGE:=/camera/rgb/image_raw
+```
+play rosbags
+```
+ cd ~/Desktop/rosbags/vegs_data/
+ rosbag play vegs_test.bag -l
+```
+subscribe `/edgetpu_object_detector/output/image`
+```
+rosrun image_view image_view image:=/edgetpu_object_detector/output/image
+```
+
 ## PointPoseExtractor
 We can use [PointPoseExtractor](https://jsk-docs.readthedocs.io/projects/jsk_recognition/en/latest/jsk_perception/nodes/point_pose_extractor.html) for
 template matching using SIFT features
