@@ -1,6 +1,0 @@
-__ignore__
-_background_
-potate
-onion
-carrot
-tomato
