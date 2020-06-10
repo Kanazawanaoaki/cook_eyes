@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find curry_detector_ros)/launch/edgetpu_vegs_detector.launch">
+    <arg name="INPUT_IMAGE" value="/camera/rgb/image_raw"/>
+  </include>
+
+  <node pkg="image_view" type="image_view" name="image_view" output="screen">
+    <remap from="image" to="/edgetpu_object_detector/output/image"/>
+  </node>
+</launch>
