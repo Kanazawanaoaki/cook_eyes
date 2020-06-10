@@ -9,7 +9,7 @@
   <arg name="machine" default="localhost" />
   <arg name="load_machine" default="true" />
   
-  <include file="$(find jsk_pcl_ros)/sample/tabletop_object_detector.launch">
+  <include file="$(find kitchen_recognition)/launch/tabletop_ssd_object_detector.launch">
     <arg name="input" value="$(arg INPUT)" />
     <arg name="sensor_frame" value="/camera_rgb_optical_frame" />
     <arg name="manager" value="$(arg manager)" />
@@ -19,20 +19,6 @@
     <arg name="launch_rviz" value="false" />
     <arg name="publish_tf" value="$(arg publish_objects_tf)" />
   </include>
-
-  <!-- 2d food coords to 3d coords -->
-  <node name="pointcloud_screenpoint_nodelet" pkg="nodelet" type="nodelet"
-        args="load jsk_pcl/PointcloudScreenpoint $(arg manager)"
-        output="screen" clear_params="true" respawn="true"
-        machine="$(arg machine)">
-    <remap from="~points" to="$(arg INPUT)" />
-    <remap from="~point" to="/camera/rgb/image_rect_color/screenpoint" />
-    <rosparam>
-      queue_size: 10
-      crop_size: 10
-      search_size: 16
-    </rosparam>
-  </node>
   
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
