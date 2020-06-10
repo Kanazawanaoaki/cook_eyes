@@ -25,7 +25,7 @@
   </include>
 
   <node pkg="rosbag" type="play" name="player" output="screen"
-	args="-l $(find kitchen_recognition)/rosbag/vegs_test.bag"/>
+	args="-l --clock $(find kitchen_recognition)/rosbag/vegs_test.bag"/>
   
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
