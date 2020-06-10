@@ -126,6 +126,7 @@
         machine="$(arg machine)">
     <remap from="~input" to="/plane_extraction/output" />
     <remap from="~target" to="/rects_to_cpi/output_throttle" />
+    <!-- <remap from="~target" to="/rects_to_cpi/output" /> -->
     <remap from="~align_planes" to="/multi_plane_estimate/output_refined_polygon" />
     <remap from="~align_planes_coefficients"
            to="/multi_plane_estimate/output_refined_coefficients" />
