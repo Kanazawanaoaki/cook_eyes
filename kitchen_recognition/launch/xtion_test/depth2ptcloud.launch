@@ -1,20 +1,13 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="rosbag" />
   <arg name="manager" default="rosbag_play_nodelet_manager" />
-  <arg name="launch_nodelet_manager" default="true" />
-  <arg name="loop" default="true" />
   <arg name="gui" default="true" />
-  <arg name="loop_flag" value="--loop" if="$(arg loop)" />
-  <arg name="loop_flag" value="" unless="$(arg loop)" />
 
   <arg name="RGB_CAMERA_INFO" value="/camera/rgb/camera_info" />
   <arg name="RGB_IMAGE" value="/camera/rgb/image_rect_color" />
   <arg name="DEPTH_CAMERA_INFO" value="/camera/depth_registered/camera_info" />
   <arg name="DEPTH_IMAGE" value="/camera/depth_registered/sw_registered/image_rect" />
 
-  <param name="use_sim_time" value="true" />
-  <!-- <param name="robot_description" textfile="$(find fetch_description)/robots/fetch.urdf" /> -->
 
   <node pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="screen" />
 
@@ -36,9 +29,6 @@
     </rosparam>
   </node>
 
-  <!-- <!-\- rosbag player -\-> -->
-  <!-- <node pkg="rosbag" type="play" name="rosbag_play" -->
-  <!--       args="$(arg rosbag) $(arg loop_flag) -\-clock" output="screen" /> -->
 
   <node pkg="rviz" type="rviz" name="$(anon rviz)" if="$(arg gui)"
         args="-d $(find jsk_2020_04_pr2_curry)/config/decompressed_test.rviz" />
