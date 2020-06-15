@@ -28,17 +28,12 @@
         machine="$(arg machine)" if="$(arg launch_manager)"
         output="screen" />
 
-  <node name="input_relay" pkg="nodelet" type="nodelet"
-        args="load jsk_topic_tools/Relay $(arg manager)"
-        machine="$(arg machine)">
-    <remap from="~input" to="$(arg input)" />
-  </node>
   <node name="multi_plane_estimate" pkg="nodelet" type="nodelet"
         args="load jsk_pcl/OrganizedMultiPlaneSegmentation $(arg manager)"
         output="screen"
         if="$(arg launch_manager)"
         machine="$(arg machine)">
-    <remap from="~input" to="input_relay/output" />
+    <remap from="~input" to="$(arg input)" />
     <rosparam>
       max_curvature: 0.01
       estimate_normal: true
@@ -54,12 +49,15 @@
         args="load jsk_pcl/MultiPlaneExtraction $(arg manager)"
         output="screen"
         machine="$(arg machine)">
-    <remap from="~input" to="input_relay/output" />
+    <remap from="~input" to="$(arg input)" />
     <remap from="~indices" to="/multi_plane_estimate/output_refined" />
     <remap from="~input_polygons" to="/multi_plane_estimate/output_refined_polygon" />
     <remap from="~input_coefficients" to="/multi_plane_estimate/output_refined_coefficients" />
     <rosparam subst_value="true">
+      use_async: true
+      max_queue_size: 1000
       use_sensor_frame: true
+      keep_organized: true
       sensor_frame: $(arg sensor_frame)
       min_height: 0.03
     </rosparam>
@@ -106,40 +104,57 @@
         pkg="jsk_recognition_utils" type="rect_array_to_cluster_point_indices.py"
         output="screen">
     <remap from="~input" to="edgetpu_object_detector/output/rects"/>
+    <remap from="~input/info" to="/camera/rgb/camera_info"/>
     <rosparam>
-      use_info: false
-      img_height: 480
-      img_width: 640
+      approximate_sync: false
+      use_info: true
     </rosparam>
   </node>
-  
-  <node name="throttle_segmentation" pkg="nodelet" type="nodelet"
+
+  <!--
+  <node name="cpi_throttle" pkg="nodelet" type="nodelet"
         args="load jsk_topic_tools/LightweightThrottle $(arg manager)"
-        output="screen"
-        machine="$(arg machine)">
+        output="screen" machine="$(arg machine)">
     <remap from="~input" to="rects_to_cpi/output" />
-    <remap from="~output" to="rects_to_cpi/output_throttle" />
+    <rosparam>
+      updata_rate: 0.5
+    </rosparam>
   </node>
+
+  <node name="point_cloud_throttle" pkg="nodelet" type="nodelet"
+        args="load jsk_topic_tools/LightweightThrottle $(arg manager)"
+        output="screen" machine="$(arg machine)">
+    <remap from="~input" to="/plane_extraction/output" />
+    <rosparam>
+      updata_rate: 0.5
+    </rosparam>
+  </node>
+  -->
+
+  <node name="image_cpi_decomposer"
+        pkg="jsk_perception" type="image_cluster_indices_decomposer.py"
+        output="screen">
+    <remap from="~input" to="/edgetpu_object_detector/output/image"/>
+    <remap from="~input/cluster_indices" to="rects_to_cpi/output" />
+  </node>
+
   <node name="segmentation_decomposer" pkg="nodelet" type="nodelet"
         args="load jsk_pcl/ClusterPointIndicesDecomposer $(arg manager)"
         output="screen"
         machine="$(arg machine)">
     <remap from="~input" to="/plane_extraction/output" />
-    <remap from="~target" to="/rects_to_cpi/output_throttle" />
-    <!-- <remap from="~target" to="/rects_to_cpi/output" /> -->
-    <remap from="~align_planes" to="/multi_plane_estimate/output_refined_polygon" />
-    <remap from="~align_planes_coefficients"
-           to="/multi_plane_estimate/output_refined_coefficients" />
+    <remap from="~target" to="/rects_to_cpi/output" />
+    <!-- <remap from="~align_planes" to="/multi_plane_estimate/output_refined_polygon" /> -->
+    <!-- <remap from="~align_planes_coefficients" to="/multi_plane_estimate/output_refined_coefficients" /> -->
     <rosparam subst_value="true">
-      align_boxes: true
+      approximate_sync: true
+      queue_size: 1000
+      align_boxes: false
+      align_boxes_with_plane: false
       use_pca: true
-      publish_clouds: false
-      publish_tf: $(arg publish_tf)
     </rosparam>
   </node>
 
-
-  
   <!-- interactive -->
   <node name="bounding_box_marker" pkg="jsk_interactive_marker" type="bounding_box_marker"
         output="screen"

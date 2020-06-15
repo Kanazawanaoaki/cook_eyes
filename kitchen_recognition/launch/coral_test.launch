@@ -1,9 +1,20 @@
 <launch>
-  <include file="$(find curry_detector_ros)/launch/edgetpu_vegs_detector.launch">
-    <arg name="INPUT_IMAGE" value="/camera/rgb/image_raw"/>
-  </include>
+  <arg name="model_file"
+       default="/home/knorth55/Downloads/output_tflite_graph_edgetpu.tflite"/>
+  <arg name="label_file"
+       default="/home/knorth55/Downloads/labels.txt"/>
+
+  <node name="edgetpu_object_detector"
+        pkg="coral_usb" type="edgetpu_object_detector.py"
+        output="screen" respawn="true">
+    <remap from="~input" to="/camera/rgb/image_raw" />
+    <rosparam subst_value="true" >
+      model_file: $(arg model_file)
+      label_file: $(arg label_file)
+    </rosparam>
+  </node>
 
   <node pkg="image_view" type="image_view" name="image_view" output="screen">
-    <remap from="image" to="/edgetpu_object_detector/output/image"/>
+    <remap from="image" to="/image_cpi_decomposer/output"/>
   </node>
 </launch>

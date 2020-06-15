@@ -1,5 +1,4 @@
 <launch>
-
   <!-- <arg name="INPUT" default="/camera/depth_registered/points" /> -->
   <arg name="INPUT" default="/camera/depth_registered/decompress/points" />
   <arg name="run_rviz" default="true" />
@@ -25,7 +24,7 @@
   </include>
 
   <node pkg="rosbag" type="play" name="player" output="screen"
-	args="-l --clock $(find kitchen_recognition)/rosbag/vegs_test.bag"/>
+	args="--loop --clock $(find kitchen_recognition)/rosbag/vegs_test.bag"/>
   
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
