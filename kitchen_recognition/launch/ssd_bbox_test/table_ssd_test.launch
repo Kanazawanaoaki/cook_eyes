@@ -1,0 +1,31 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="INPUT" default="/camera/depth_registered/points" />
+  <!-- <arg name="INPUT" default="/camera/depth_registered/decompress/points" /> -->
+  <arg name="SENSOR" default="/camera_rgb_optical_frame" />
+  <arg name="CAM_INFO" default="/camera/rgb/camera_info" />
+  <arg name="SSD_OUTPUT" default="/edgetpu_object_detector/output" />
+  <arg name="run_rviz" default="true" />
+  <arg name="publish_objects_tf" default="true" />
+  <arg name="launch_tracking" default="false" />
+  <arg name="manager" default="pr2_tabletop_object_detector_nodelet_manager"/>
+  <arg name="machine" default="localhost" />
+  <arg name="load_machine" default="true" />
+
+  <include file="$(find jsk_recognition_utils)/sample/sample_table_ssd_to_bounding_box.launch">
+    <arg name="input" value="$(arg INPUT)" />
+    <arg name="sensor_frame" value="$(arg SENSOR)" />
+    <arg name="cam_info" value="$(arg CAM_INFO)" />
+    <arg name="ssd_output" value="$(arg SSD_OUTPUT)" />
+    <arg name="manager" value="$(arg manager)" />
+    <arg name="machine" value="$(arg machine)" />
+    <arg name="launch_openni" value="false" />
+    <arg name="launch_tracking" value="$(arg launch_tracking)" />
+    <arg name="launch_rviz" value="false" />
+    <arg name="publish_tf" value="$(arg publish_objects_tf)" />
+  </include>
+
+  <node if="$(arg run_rviz)"
+        pkg="rviz" name="pr2_rviz" type="rviz"
+        args="-d $(find kitchen_recognition)/config/vegs_tabletop_test_for_xtion.rviz" />
+</launch>
