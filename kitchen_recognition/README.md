@@ -88,3 +88,16 @@ play rosbag
 ```
 rosbag play switch.bag -l
 ```
+
+
+## rosbags
+how to play rosbags
+
+### PR2 73B2 20200702
+record and play with [this PR](https://github.com/jsk-ros-pkg/jsk_robot/pull/1228 )
+```
+cd ~/Desktop/rosbags/PR2/20200702_kanazawa_kitchen
+source ~/semi_ws/devel/setup.bash
+roslaunch jsk_pr2_startup rosbag_play.launch rosbag:=/home/kanazawa/Desktop/rosbags/PR2/20200702_kanazawa_kitchen/202007021723_kitchen_12_potato_on_board.bag gui:=true
+```
+In this rosbag, pointclouds:`/kinect_head/depth_registered/throttled/points` image:`/kinect_head/rgb/image_rect_color`
