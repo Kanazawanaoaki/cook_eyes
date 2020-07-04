@@ -91,7 +91,7 @@ rosbag play switch.bag -l
 
 
 ## rosbags
-how to play rosbags
+how to play and record rosbags
 
 ### PR2 73B2 20200702
 record and play with [this PR](https://github.com/jsk-ros-pkg/jsk_robot/pull/1228 )
@@ -100,4 +100,28 @@ cd ~/Desktop/rosbags/PR2/20200702_kanazawa_kitchen
 source ~/semi_ws/devel/setup.bash
 roslaunch jsk_pr2_startup rosbag_play.launch rosbag:=/home/kanazawa/Desktop/rosbags/PR2/20200702_kanazawa_kitchen/202007021723_kitchen_12_potato_on_board.bag gui:=true
 ```
-In this rosbag, pointclouds:`/kinect_head/depth_registered/throttled/points` image:`/kinect_head/rgb/image_rect_color`
+In this rosbag,  
+pointclouds:`/kinect_head/depth_registered/throttled/points`  
+image:`/kinect_head/rgb/image_rect_color`
+
+
+### Xtion rosbags
+#### record
+start openni launch
+```
+source ~/semi_ws/devel/setup.bash
+roslaunch jsk_2020_04_chahakobi xtion_test.launch
+```
+start recording
+```
+source ~/ros/jsk_demo_ws/devel/setup.bash
+roslaunch rosbag_compressed_record.launch rosbag:=tmp_test
+```
+
+#### play
+```
+roslaunch rosbag_play.launch rosbag:=/home/kanazawa/Desktop/rosbags/vegs_data/potato.bag
+```
+In this rosbag,  
+pointclouds:`/camera/depth_registered/points`  
+image:`/camera/rgb/image_rect_color`
