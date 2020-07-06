@@ -145,7 +145,7 @@ pointclouds:`/camera/depth_registered/points`
 image:`/camera/rgb/image_rect_color`
 
 #### data_collection_server
-[using data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html ) to save data from rostopic
+using [data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html ) to save data from rostopic
 ```
 source ~/ros/jsk_demo_ws/devel/setup.bash
 roslaunch kitchen_recognition data_collection_server_test.launch
