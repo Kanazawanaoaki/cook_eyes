@@ -120,8 +120,18 @@ roslaunch rosbag_compressed_record.launch rosbag:=tmp_test
 
 #### play
 ```
-roslaunch rosbag_play.launch rosbag:=/home/kanazawa/Desktop/rosbags/vegs_data/potato.bag
+source ~/ros/jsk_demo_ws/devel/setup.bash
+roslaunch kitchen_recognition rosbag_play.launch rosbag:=/home/kanazawa/Desktop/rosbags/vegs_data/potato.bag
 ```
 In this rosbag,  
 pointclouds:`/camera/depth_registered/points`  
 image:`/camera/rgb/image_rect_color`
+
+#### data_collection_server
+[using data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html )to save data from rostopic
+```
+roslaunch kitchen_recognition data_collection_server_test.launch
+```
+```
+rosservice call /after_stow_data_collection/save_request "{}"
+```
