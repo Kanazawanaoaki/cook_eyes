@@ -95,6 +95,14 @@ how to play and record rosbags
 
 ### PR2 73B2 20200702
 record and play with [this PR](https://github.com/jsk-ros-pkg/jsk_robot/pull/1228 )
+
+#### record
+```
+source ~/semi_ws/devel/setup.bash
+roslaunch jsk_pr2_startup rosbag_record.launch rosbag:=/home/kanazawa/Desktop/rosbags/PR2/20200706_kanazawa_kitchen/202007061723_kitchen_01
+```
+
+#### play
 ```
 cd ~/Desktop/rosbags/PR2/20200702_kanazawa_kitchen
 source ~/semi_ws/devel/setup.bash
@@ -104,6 +112,15 @@ In this rosbag,
 pointclouds:`/kinect_head/depth_registered/throttled/points`  
 image:`/kinect_head/rgb/image_rect_color`
 
+#### data_collection_server
+[using data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html ) to save data from rostopic
+```
+source ~/ros/jsk_demo_ws/devel/setup.bash
+roslaunch kitchen_recognition pr2_data_collection_server_test.launch
+```
+```
+rosservice call /after_stow_data_collection/save_request "{}"
+```
 
 ### Xtion rosbags
 #### record
@@ -128,8 +145,9 @@ pointclouds:`/camera/depth_registered/points`
 image:`/camera/rgb/image_rect_color`
 
 #### data_collection_server
-[using data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html )to save data from rostopic
+[using data_collection_server](https://jsk-common.readthedocs.io/en/latest/jsk_data/node_scripts/data_collection_server.html ) to save data from rostopic
 ```
+source ~/ros/jsk_demo_ws/devel/setup.bash
 roslaunch kitchen_recognition data_collection_server_test.launch
 ```
 ```
