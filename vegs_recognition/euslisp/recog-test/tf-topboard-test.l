@@ -17,7 +17,8 @@
   ;; set まな板
   (load "../model/cutting-board.l")
   (setq *cutting-board* (cutting-board))
-  (send *cutting-board* :transform (make-coords :pos (float-vector 480.0 1950.0 820.0) :rot #2f((1.0 2.449294e-16 0.0) (-2.449294e-16 1.0 0.0) (0.0 0.0 1.0))))
+  ;; (send *cutting-board* :transform (make-coords :pos (float-vector 480.0 1950.0 820.0) :rot #2f((1.0 2.449294e-16 0.0) (-2.449294e-16 1.0 0.0) (0.0 0.0 1.0))))
+  (send *cutting-board* :transform (make-coords :pos (float-vector 480.0 1950.0 840.0) :rot #2f((1.0 2.449294e-16 0.0) (-2.449294e-16 1.0 0.0) (0.0 0.0 1.0))))
 
   ;; set objects
   (load "../model/peeler.l")
@@ -36,6 +37,9 @@
     (send *pr2* :move-to *kitchen-spot* :world)
     )
   (move-to-kitchen-irt)
+  
+  ;; (send *pr2* :translate #f(0 0 -20))
+  
   (send *pr2* :reset-manip-pose)
   (send *pr2* :torso_lift_joint :joint-angle 325)
   ;; (send *ri* :angle-vector (send *pr2* :angle-vector) 4000)
@@ -67,7 +71,9 @@
 
 ;; (setq obj-coord (make-coords :pos (float-vector 620 50 820)))
 ;; (setq obj-coord (make-coords :pos (float-vector 620 50 830)))
+
 (setq obj-coord (make-coords :pos (float-vector 620 50 840)))
+
 ;; (setq obj-coord (make-coords :pos (float-vector 620 50 850)))
 ;; (setq obj-coord (make-coords :pos (float-vector 647 10 899)))
 
