@@ -8,7 +8,8 @@
     See http://wiki.ros.org/roslaunch/XML/param and http://wiki.ros.org/roslaunch/XML/rosparam for detail.
     -->
     <rosparam subst_value="true">
-      file_name: $(find jsk_perception)/sample/kiva_pod_image_color.jpg
+      file_name: $(find vegs_recognition)/sample/potato_peel_image1_20200903.png
+      <!-- file_name: $(find vegs_recognition)/sample/potato_peel_image2_20200903.png -->
       rate: 30
     </rosparam>
   </node>

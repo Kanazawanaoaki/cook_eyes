@@ -5,12 +5,12 @@
     <remap from="image" to="image_publisher/output" />
     <rosparam>
       use_camera_info: false
-      h_limit_max: 360
-      h_limit_min: 340
-      s_limit_max: 220
-      s_limit_min: 170
-      v_limit_max: 130
-      v_limit_min: 80
+      h_limit_max: 95
+      h_limit_min: 10
+      s_limit_max: 175
+      s_limit_min: 80
+      v_limit_max: 255
+      v_limit_min: 140
     </rosparam>
   </node>
 
