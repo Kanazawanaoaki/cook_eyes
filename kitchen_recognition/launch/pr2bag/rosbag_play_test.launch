@@ -13,6 +13,8 @@
   <arg name="QUAT_RGB_IMAGE" value="/kinect_head/rgb/quater/throttled/image_rect_color" />
   <arg name="DEPTH_CAMERA_INFO" value="/kinect_head/depth_registered/throttled/camera_info" />
   <arg name="DEPTH_IMAGE" value="/kinect_head/depth_registered/throttled/image_rect" />
+  <arg name="PROSILICA_CAMERA_INFO" value="/prosilica/camera_info" />
+  <arg name="PROSILICA_IMAGE" value="/prosilica/image_raw" />
 
   <param name="use_sim_time" value="true" />
 
@@ -27,6 +29,10 @@
         args="compressed in:=$(arg RGB_IMAGE) out:=$(arg RGB_IMAGE)" />
   <node name="depth_decompress" pkg="image_transport" type="republish"
         args="compressedDepth in:=$(arg DEPTH_IMAGE) out:=$(arg DEPTH_IMAGE)" />
+
+  <node name="prosilica_decompress" pkg="image_transport" type="republish"
+        args="compressed in:=$(arg PROSILICA_IMAGE) out:=$(arg PROSILICA_IMAGE)" />
+
   <node pkg="nodelet" type="nodelet" name="point_cloud_xyzrgb"
         args="load depth_image_proc/point_cloud_xyzrgb $(arg manager)" output="screen" >
     <remap from="rgb/camera_info" to="$(arg RGB_CAMERA_INFO)" />

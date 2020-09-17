@@ -32,6 +32,8 @@
           /kinect_head/depth_registered/throttled/camera_info
           /kinect_head/rgb/throttled/image_rect_color/compressed
           /kinect_head/depth_registered/throttled/image_rect/compressedDepth
+	  /prosilica/camera_info
+	  /prosilica/image_raw/compressed
           /audio"
       output="screen" />
 
