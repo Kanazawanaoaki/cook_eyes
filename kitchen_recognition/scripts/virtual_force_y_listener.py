@@ -3,11 +3,11 @@ import rospy
 from geometry_msgs.msg import WrenchStamped
 
 def callback(data):
-    z = data.wrench.force.z
-    if z > 10:
-        print "OK!! " + str(z)
+    y = data.wrench.force.y
+    if y < -10:
+        print "OK!! " + str(y)
     else :
-        print z
+        print y
 
 def listener():
     rospy.init_node('listener', anonymous=True)
