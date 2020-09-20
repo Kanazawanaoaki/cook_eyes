@@ -4,7 +4,7 @@ from geometry_msgs.msg import WrenchStamped
 
 def callback(data):
     y = data.wrench.force.y
-    if y < -15:
+    if y < -10:
         print "OK!! " + str(y)
     else :
         print y
