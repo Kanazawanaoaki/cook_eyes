@@ -11,7 +11,7 @@ def callback(data):
     y = data.wrench.force.y
 
     y_list.append(y)
-    f = open('wrench_list.txt', 'w')
+    f = open('wrench_y_list.txt', 'w')
     for x in y_list:
         f.write(str(x) + "\n")
     f.close()

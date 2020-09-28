@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-f = open("./wrench_list.txt","r")
+f = open("./wrench_z_list.txt","r")
 list_row = []
 
 for x in f:
