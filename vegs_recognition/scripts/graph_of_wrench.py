@@ -6,9 +6,16 @@ import matplotlib.pyplot as plt
 
 y_list = []
 
+
 def callback(data):
     y = data.wrench.force.y
+
     y_list.append(y)
+    f = open('wrench_list.txt', 'w')
+    for x in y_list:
+        f.write(str(x) + "\n")
+    f.close()
+    
     if y < -10:
         print "OK!! " + str(y)
     else :
