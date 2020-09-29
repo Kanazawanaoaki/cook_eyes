@@ -30,7 +30,7 @@
       <remap from="depth_registered/image_rect" to="$(arg DEPTH_IMAGE)" />
       <remap from="depth_registered/points" to="/kinect_head/depth_registered/throttled/points" />
       <rosparam>
-	queue_size: 100
+        queue_size: 100
       </rosparam>
     </node>
   </group>
