@@ -1,6 +1,6 @@
 <launch>
   
-  <arg name="INPUT" default="/kinect_head/depth_registered/throttled_hoge/points" />
+  <arg name="INPUT" default="/kinect_head/depth_registered/throttled/points" />
   <arg name="manager" default="pr2_cutting_board_nodelet_manager" />
 
   <arg name="RGB_CAMERA_INFO" value="/kinect_head/rgb/throttled/camera_info" />
@@ -28,7 +28,7 @@
       <remap from="rgb/camera_info" to="$(arg RGB_CAMERA_INFO)" />
       <remap from="rgb/image_rect_color" to="$(arg RGB_IMAGE)" />
       <remap from="depth_registered/image_rect" to="$(arg DEPTH_IMAGE)" />
-      <remap from="depth_registered/points" to="/kinect_head/depth_registered/throttled_hoge/points" />
+      <remap from="depth_registered/points" to="/kinect_head/depth_registered/throttled/points" />
       <rosparam>
         queue_size: 100
       </rosparam>
