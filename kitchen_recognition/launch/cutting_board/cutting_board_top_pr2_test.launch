@@ -68,7 +68,7 @@
 
   <machine name="localhost" address="localhost" />
 
-  <group ns="cutting_board">
+  <!-- <group ns="cutting_board"> -->
     <!-- tabletop object detection -->
     <node name="$(arg manager)" pkg="nodelet" type="nodelet" args="manager"
           machine="$(arg machine)" if="$(arg launch_manager)"
@@ -160,7 +160,7 @@
       <remap from="~selected_index" to="bounding_box_marker/selected_index" />
       <remap from="~output" to="selected_pointcloud" />
     </node>
-  </group>
+  <!-- </group> -->
 
   <node if="$(arg run_rviz)"
         pkg="rviz" name="pr2_rviz" type="rviz"
