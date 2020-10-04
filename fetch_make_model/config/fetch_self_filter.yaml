@@ -1,0 +1,23 @@
+self_see_links:
+  - name: base_link
+    padding: .01
+  - name: torso_lift_link
+    padding: .01
+  - name: shoulder_pan_link
+    padding: .01
+  - name: shoulder_lift_link
+    padding: .01
+  - name: upperarm_roll_link
+    padding: .04
+  - name: elbow_flex_link
+    padding: .01
+  - name: forearm_roll_link
+    padding: .01
+  - name: wrist_flex_link
+    padding: .01
+  - name: wrist_roll_link
+    padding: .01
+  - name: head_pan_link
+    padding: .01
+  - name: head_tilt_link
+    padding: .01

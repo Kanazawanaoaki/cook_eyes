@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <arg name="gui" default="true"/>
+  <!-- <arg name="INPUT" default="/kinect_head/depth_registered/throttled/points" /> -->
+  <arg name="INPUT" default="/head_camera/depth_registered/points" />
+
+  <node name="$(anon self_filter)"
+        pkg="robot_self_filter" type="self_filter"
+        clear_params="true" respawn="true">
+    <remap from="robot_description" to="/robot_description" />
+    <remap from="cloud_in" to="$(arg INPUT)" />
+    <remap from="cloud_out" to="robot_self_filterd_points" />
+    <rosparam>
+      use_rgb: true
+      keep_organized: true
+      subsample_value: 0.0
+    </rosparam>
+    <rosparam command="load"
+              file="$(find fetch_make_model)/config/fetch_self_filter.yaml" />
+  </node>
+
+  <group if="$(arg gui)">
+    <node name="rviz"
+          pkg="rviz" type="rviz"
+          args="-d $(find fetch_make_model)/config/fetch_self_filter_test.rviz"/>
+  </group>
+</launch>
