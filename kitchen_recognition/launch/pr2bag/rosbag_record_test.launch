@@ -34,6 +34,7 @@
           /kinect_head/depth_registered/throttled/image_rect/compressedDepth
 	  /prosilica/camera_info
 	  /prosilica/image_raw/compressed
+	  /right_endeffector/wrench
           /audio"
       output="screen" />
 
