@@ -10,8 +10,11 @@
 (ros::rate 100)
 (while (ros::ok)
   (send *pr2* :angle-vector (send *ri* :state :potentio-vector))
-  (setq msg (instance geometry_msgs::PoseStamped :init))
-  (send msg :pose :position (send (send *pr2* :rarm :end-coords) :worldpos))
+  (setq msg (instance geometry_msgs::Pose :init))
+
+  (setq *coords* (send *pr2* :rarm :end-coords))
+  (setq *pose* (ros::coords->tf-pose *coords*))
+  (setq msg *pose*)
+
   (ros::publish "/pr2_end_pose/right" msg)
-  (ros::sleep)
   )
