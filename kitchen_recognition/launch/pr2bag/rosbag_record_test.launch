@@ -35,6 +35,7 @@
 	  /prosilica/camera_info
 	  /prosilica/image_raw/compressed
 	  /right_endeffector/wrench
+	  /pr2_end_pose/right
           /audio"
       output="screen" />
 
