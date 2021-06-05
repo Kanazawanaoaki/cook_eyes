@@ -5,6 +5,8 @@ from cv_bridge import CvBridge
 import cv2
 import numpy
 
+from std_msgs.msg import Int64
+
 def subtract_cb(msg):
     try:
         bridge = CvBridge()
@@ -12,6 +14,9 @@ def subtract_cb(msg):
         fgmask = fgbg.apply(img)
         cv2.imshow('image', img)
         cv2.imshow('frame', fgmask)
+        num = fgmask[0].sum()/255
+        rospy.loginfo(num)
+        pub.publish(num)
         cv2.waitKey(1)
     except Exception as err:
         print err
@@ -24,6 +29,7 @@ def listener():
 
 
 if __name__ == '__main__':
+    pub = rospy.Publisher('subtractor_detection', Int64, queue_size=10)
     fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
     listener()
 
