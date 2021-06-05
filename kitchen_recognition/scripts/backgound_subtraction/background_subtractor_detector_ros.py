@@ -3,7 +3,7 @@ import rospy
 from sensor_msgs.msg import Image 
 from cv_bridge import CvBridge
 import cv2
-import numpy
+import numpy as np
 
 from std_msgs.msg import Int64
 
@@ -14,7 +14,8 @@ def subtract_cb(msg):
         fgmask = fgbg.apply(img)
         cv2.imshow('image', img)
         cv2.imshow('frame', fgmask)
-        num = fgmask[0].sum()/255
+        x , y = np.where(fgmask > 200)
+        num = x.size
         rospy.loginfo(num)
         pub.publish(num)
         cv2.waitKey(1)
