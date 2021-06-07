@@ -80,7 +80,7 @@
 
 
 (setq *cp2ra* (instance coral-pot-to-rect-array-gate :init))
-
+(send *cp2ra* :call-synchronizer)
 
 
 ;; ;; TODO
