@@ -50,6 +50,20 @@
       )
     ))
 
+(defun trigger-cb (req)
+  (let ((m (send req :response)))
+    (format t "call synchronizer-once !! ~%")
+    (send m :success t)
+    (send *cp2ra* :call-synchronizer-once)
+    m))
+
+(defun trigger-cb-test (req)
+  (let ((m (send req :response)))
+    (format t "srv-test ~%")
+    (send m :success t)
+    (send m :message "srv test success")
+    m))
+
 
 (defclass coral-pot-to-rect-array-gate
   :slots
@@ -86,10 +100,23 @@
      )
    )
   (:wait-srv
-   (ros::advertise-service "add_two_ints" roseus::AddTwoInts #'add-two-ints)
-   ;; WIP
+   ()
+   (ros::advertise-service "coral_pot_gate" std_srvs::Trigger #'trigger-cb)
+   (do-until-key
+    (ros::spin-once))
+   )
+  (:wait-srv-test
+   ()
+   (ros::advertise-service "coral_pot_gate_test" std_srvs::Trigger #'trigger-cb-test)
+   (do-until-key
+    (ros::spin-once))
+   )
+  
   )
 
 
 (setq *cp2ra* (instance coral-pot-to-rect-array-gate :init))
+(format t "init *cp2ra* ~%")
+
 ;; (send *cp2ra* :call-synchronizer)
+(send *cp2ra* :wait-srv-test)
