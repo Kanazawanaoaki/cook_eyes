@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find audio_to_spectrogram)/launch/audio_to_spectrogram.launch">
+    <arg name="launch_audio_capture" value="false"/>
+    <arg name="audio_topic" value="/audio/audio"/>
+
+    <!-- <arg name="mic_sampling_rate" value="16000"/> -->
+    <!-- <arg name="bitdepth" value="16"/> -->
+  </include>
+</launch>

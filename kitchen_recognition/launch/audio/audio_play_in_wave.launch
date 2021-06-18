@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find audio_play)/launch/play.launch">
+    <arg name="format" value="wave"/>
+  </include>
+</launch>

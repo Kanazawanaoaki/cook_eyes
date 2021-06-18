@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find audio_capture)/launch/capture.launch">
+    <arg name="bitrate" value="256"/>
+    <arg name="format" value="wave"/>
+  </include>
+</launch>
