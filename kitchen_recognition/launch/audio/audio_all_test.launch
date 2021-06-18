@@ -1,0 +1,11 @@
+<launch>
+  <!-- my capture launch -->
+  <include file="$(find kitchen_recognition)/launch/audio_capture_in_wave.launch"/>
+  
+  <!-- my play launch for listen -->
+  <include file="$(find kitchen_recognition)/launch/audio_play_in_wave.launch"/>
+
+  <!-- my audio to spectrogram launch -->
+  <include file="$(find kitchen_recognition)/launch/audio_to_apectrogram_for_capture.launch"/>
+  
+</launch>
